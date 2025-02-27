@@ -8,14 +8,28 @@ type Persistable = {
     [key: string]: any | Persistable;
 } | (any | Persistable)[];
 
+/**
+ * Create a global data store, that can be (partially) persisted.
+ * 
+ * @see {@link https://www.npmjs.com/package/@infinityfx/gs}
+ */
 export default function createGlobalStore<T extends Persistable>({ initial, key, persist }: {
     initial: T;
+    /**
+     * Unique key used to store persistent data under, inside local storage.
+     * When not specified, a unique key is generated based on the initial data.
+     */
     key?: string;
+    /**
+     * Whether to persist data inside local storage.
+     * 
+     * @default false
+     */
     persist?: boolean | (keyof T)[];
 }) {
     const id = key ?? '$GS.' + hash(initial),
         mutable = {
-            data: Object.assign({}, initial) as T,
+            data: parseJson(JSON.stringify(initial)) as T,
             loaded: !persist
         };
 

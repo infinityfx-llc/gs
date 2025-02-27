@@ -1,6 +1,6 @@
 {
 	"name": "@infinityfx/gs",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"type": "module",
 	"description": "React persistable global store",
 	"main": "dist/index.js",
