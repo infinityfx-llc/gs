@@ -75,11 +75,9 @@ export default function createGlobalStore<T extends Persistable>({ initial, key,
         }
 
         useEffect(() => {
-            if (!mutable.loaded && persist) {
-                setLoaded(true);
-                load();
-            }
+            if (!mutable.loaded && persist) load();
 
+            setLoaded(true);
             synchronize({ detail: id });
 
             const ctrl = new AbortController(),
